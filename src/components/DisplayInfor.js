@@ -1,43 +1,30 @@
-import React from "react";
-
-// class DisplayInfor extends React.Component {
-
-//   render() {
-//     console.log(">>> call me render");
-//     const { listUser } = this.props;
-//     return (
-//       <div>
-        
-//         {true && (
-//           <>
-//             {listUser.map((user) => {
-//               return (
-//                 <div key={user.id} className={+user.age > 18 ? "green" : "red"}>
-//                   <div>
-//                   <div>my name is {user.name}</div>
-//                   <div>my age is {user.age}</div>
-//                   </div>
-//                   <div>
-//                     <button onClick={() => this.props.handleDeleteUser(user.id)}>Delete</button>
-//                   </div>
-//                   <hr />
-//                 </div>
-                
-//               );
-//             })}
-//           </>
-//         )}
-//       </div>
-//     );
-//   }
-// }
+import React, { useEffect, useState } from "react";
 
 const DisplayInfor = (props) => {
   const { listUser } = props; // object
+  const [isShowHideListUser, setShowHideListUser] = useState(true);
+  
+  const handleShowHide = () => {
+    setShowHideListUser(!isShowHideListUser);
+  }
+
+  console.log(">>> call me render");
+
+  useEffect(() => {
+    if (listUser.length === 0) {
+      alert("you deleted all the users");
+    }
+    console.log("call me useEffect");
+  },[listUser])
 
     return (
       <div>
-        {true && (
+        <div>
+          <span onClick={() => handleShowHide()}>
+            {isShowHideListUser === true ? "Hide list user" : "Show list user"}
+          </span>
+        </div>
+        {isShowHideListUser && (
           <>
             {listUser.map((user) => {
               return (
